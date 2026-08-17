@@ -1,5 +1,5 @@
 from matrix import input_matrix
-from mac import calculate_mac
+from mac import calculate_mac, determine_result
 
 
 def select_mode() -> str:
@@ -24,8 +24,15 @@ def main() -> None:
         score_a = calculate_mac(pattern, filter_a)
         score_b = calculate_mac(pattern, filter_b)
 
+        result = determine_result(score_a, score_b)
+
         print(f"\nA 점수: {score_a}")
         print(f"B 점수: {score_b}")
+
+        if result == "UNDECIDED":
+            print("판정: 판정 불가")
+        else:
+            print(f"판정: {result}")
 
     if mode == "2":
         print("data.json 분석 모드를 선택했습니다.")
