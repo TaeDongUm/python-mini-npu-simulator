@@ -1,6 +1,7 @@
 from matrix import input_matrix
 from mac import calculate_mac, determine_result
 from performance import measure_performance
+from analyzer import load_data
 
 
 def select_mode() -> str:
@@ -42,7 +43,10 @@ def main() -> None:
             print(f"판정: {result}")
 
     if mode == "2":
-        print("data.json 분석 모드를 선택했습니다.")
+        filters, patterns = load_data("data.json")
+
+        print("filters 로드 완료")
+        print("patterns 로드 완료")
 
 
 if __name__ == "__main__":

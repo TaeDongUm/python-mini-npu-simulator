@@ -16,13 +16,13 @@
 
 ## 3. MAC 연산
 
-- [ ] 외부 라이브러리 없이 2중 반복문으로 위치별 `곱셈 + 누적`을 구현함
-- [ ] 3×3뿐 아니라 N×N 배열에서도 같은 MAC 함수를 사용할 수 있음
-- [ ] 점수 비교 시 `abs(score_a - score_b) < epsilon` 정책을 사용함
+- [x] 외부 라이브러리 없이 2중 반복문으로 위치별 `곱셈 + 누적`을 구현함
+- [x] 3×3뿐 아니라 N×N 배열에서도 같은 MAC 함수를 사용할 수 있음
+- [x] 점수 비교 시 `abs(score_a - score_b) < epsilon` 정책을 사용함
 
 ## 4. data.json 분석
 
-- [ ] `data.json`에서 filters와 patterns를 정상적으로 읽음
+- [x] `data.json`에서 filters와 patterns를 정상적으로 읽음
 - [ ] `size_5_1`, `size_13_1` 등의 키에서 N을 추출하여 알맞은 필터를 선택함
 - [ ] `+ / cross → Cross`, `x → X` 형태로 라벨을 정규화함
 - [ ] 패턴과 필터의 N×N 크기가 맞는지 검증함
