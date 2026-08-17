@@ -1,3 +1,6 @@
+from matrix import input_matrix
+
+
 def select_mode() -> str:
     print("=== Mini NPU Simulator ===")
     print()
@@ -13,7 +16,11 @@ def main() -> None:
     mode = select_mode()
 
     if mode == "1":
-        print("사용자 입력 모드를 선택했습니다.")
+        filter_a = input_matrix("필터 A")
+        filter_b = input_matrix("필터 B")
+        pattern = input_matrix("패턴")
+
+        print("\n3x3 입력이 완료되었습니다.")
 
     if mode == "2":
         print("data.json 분석 모드를 선택했습니다.")
