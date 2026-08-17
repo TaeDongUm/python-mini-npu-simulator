@@ -1,4 +1,5 @@
 from matrix import input_matrix
+from mac import calculate_mac
 
 
 def select_mode() -> str:
@@ -20,7 +21,11 @@ def main() -> None:
         filter_b = input_matrix("필터 B")
         pattern = input_matrix("패턴")
 
-        print("\n3x3 입력이 완료되었습니다.")
+        score_a = calculate_mac(pattern, filter_a)
+        score_b = calculate_mac(pattern, filter_b)
+
+        print(f"\nA 점수: {score_a}")
+        print(f"B 점수: {score_b}")
 
     if mode == "2":
         print("data.json 분석 모드를 선택했습니다.")
