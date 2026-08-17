@@ -1,5 +1,6 @@
 from matrix import input_matrix
 from mac import calculate_mac, determine_result
+from performance import measure_performance
 
 
 def select_mode() -> str:
@@ -26,8 +27,14 @@ def main() -> None:
 
         result = determine_result(score_a, score_b)
 
+        average_time = measure_performance(
+            pattern,
+            filter_a
+        )
+
         print(f"\nA 점수: {score_a}")
         print(f"B 점수: {score_b}")
+        print(f"연산 시간(평균/10회): {average_time:.6f} ms")
 
         if result == "UNDECIDED":
             print("판정: 판정 불가")
