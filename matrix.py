@@ -3,8 +3,20 @@ def input_matrix(title: str, size: int = 3) -> list[list[float]]:
 
     matrix = []
 
-    for _ in range(size):
-        row = list(map(float, input().split()))
+    while len(matrix) < size:
+        try:
+            row = list(map(float, input().split()))
+        except ValueError:
+            print("입력 형식 오류: 숫자만 입력하세요.")
+            continue
+
+        if len(row) != size:
+            print(
+                f"입력 형식 오류: 각 줄에 {size}개의 숫자를 "
+                "공백으로 구분해 입력하세요."
+            )
+            continue
+
         matrix.append(row)
 
     return matrix
