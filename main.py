@@ -163,6 +163,15 @@ def main() -> None:
         print(f"통과: {pass_count}개")
         print(f"실패: {fail_count}개")
 
+        if failures:
+            print("\n실패 케이스:")
+
+        for failure in failures:
+            print(
+                f"- {failure['case_id']}: "
+                f"{failure['reason']}"
+            )
+
         # print("filters 로드 완료")
         # print("patterns 로드 완료")
 
