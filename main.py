@@ -129,6 +129,22 @@ def main() -> None:
                 print(f"expected: {expected}")
                 print(f"결과: {status}")
 
+                print("\n#---------------------------------------")
+                print("# 성능 분석")
+                print("#---------------------------------------")
+
+                print(f"{'크기':<10}{'평균 시간(ms)':<20}{'연산 횟수'}")
+                print("-" * 45)
+
+                for size, average_time in performance_results:
+                    operation_count = size * size
+
+                    print(
+                        f"{size}x{size:<7}"
+                        f"{average_time:<20.6f}"
+                        f"{operation_count}"
+                    )
+
             except (KeyError, ValueError, TypeError) as error:
                 print(f"{case_id}: 데이터 오류 ({error}) - 다음 케이스로 이동")
                 continue
