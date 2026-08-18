@@ -95,10 +95,22 @@ def main() -> None:
                     "X"
                 )
 
+                expected = normalize_label(case_data["expected"])
+
+                if expected is None:
+                    print(f"{case_id}: expected 라벨 오류")
+                    continue
+                if result == expected:
+                    status = "PASS"
+                else:
+                    status = "FAIL"
+
                 print(f"\n--- {case_id} ---")
                 print(f"Cross 점수: {cross_score}")
                 print(f"X 점수: {x_score}")
                 print(f"판정: {result}")
+                print(f"expected: {expected}")
+                print(f"결과: {status}")
 
             except (KeyError, ValueError, TypeError) as error:
                 print(f"{case_id}: 데이터 오류 ({error}) - 다음 케이스로 이동")

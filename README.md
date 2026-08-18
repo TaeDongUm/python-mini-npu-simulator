@@ -32,7 +32,7 @@
 
 - [x] 각 패턴에 대해 Cross/X MAC 점수를 계산함
 - [x] Cross / X / UNDECIDED를 판정함
-- [ ] expected와 비교하여 PASS / FAIL을 출력함
+- [x] expected와 비교하여 PASS / FAIL을 출력함
 - [ ] FAIL인 경우 케이스와 실패 이유를 남김
 
 ## 6. 성능 분석
