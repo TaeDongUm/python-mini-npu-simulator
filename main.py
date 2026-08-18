@@ -1,7 +1,8 @@
 from matrix import input_matrix
 from mac import calculate_mac, determine_result
 from performance import measure_performance
-from analyzer import load_data, select_filters
+from analyzer import load_data, extract_size, select_filters
+from matrix import validate_matrix
 
 
 def select_mode() -> str:
@@ -45,9 +46,22 @@ def main() -> None:
     if mode == "2":
         filters, patterns = load_data("data.json")
 
-        for case_id in patterns:
-            selected_filters = select_filters(case_id, filters)
-            print(f"{case_id} -> 필터 선택 완료")
+        for case_id, case_data in patterns.items():
+            try:
+                size = extract_size(case_id)
+                selected_filters = select_filters(case_id, filters)
+
+                pattern = case_data["input"]
+
+                if not validate_matrix(pattern, size):
+                    print(f"{case_id}: 패턴 크기 오류 - 다음 케이스로 이동")
+                    continue
+
+                print(f"{case_id}: 크기 검증 완료")
+
+            except (KeyError, ValueError, TypeError) as error:
+                print(f"{case_id}: 데이터 오류 ({error}) - 다음 케이스로 이동")
+                continue
 
         print("filters 로드 완료")
         print("patterns 로드 완료")
