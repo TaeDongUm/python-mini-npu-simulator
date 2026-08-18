@@ -15,11 +15,16 @@ def calculate_mac(
     return score
 
 
-def determine_result(score_a: float, score_b: float) -> str:
+def determine_result(
+    score_a: float,
+    score_b: float,
+    label_a: str = "A",
+    label_b: str = "B"
+) -> str:
     if abs(score_a - score_b) < EPSILON:
         return "UNDECIDED"
 
     if score_a > score_b:
-        return "A"
+        return label_a
 
-    return "B"
+    return label_b

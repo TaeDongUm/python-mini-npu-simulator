@@ -88,9 +88,17 @@ def main() -> None:
                 cross_score = calculate_mac(pattern, cross_filter)
                 x_score = calculate_mac(pattern, x_filter)
 
+                result = determine_result(
+                    cross_filter,
+                    x_score,
+                    "Cross",
+                    "X"
+                )
+
                 print(f"\n--- {case_id} ---")
                 print(f"Cross 점수: {cross_score}")
                 print(f"X 점수: {x_score}")
+                print(f"판정: {result}")
 
             except (KeyError, ValueError, TypeError) as error:
                 print(f"{case_id}: 데이터 오류 ({error}) - 다음 케이스로 이동")
