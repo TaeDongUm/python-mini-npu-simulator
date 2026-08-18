@@ -52,9 +52,13 @@ def main() -> None:
     if mode == "2":
         filters, patterns = load_data("data.json")
 
+        total_count = 0
+        pass_count = 0
+        fail_count = 0
         failures = []
 
         for case_id, case_data in patterns.items():
+            total_count += 1
             try:
                 size = extract_size(case_id)
                 selected_filters = select_filters(case_id, filters)
@@ -105,8 +109,10 @@ def main() -> None:
                     continue
                 if result == expected:
                     status = "PASS"
+                    pass_count += 1
                 else:
                     status = "FAIL"
+                    fail_count += 1
 
                 if status == "FAIL":
                     if result == "UNDECIDED":
@@ -149,8 +155,16 @@ def main() -> None:
                 print(f"{case_id}: 데이터 오류 ({error}) - 다음 케이스로 이동")
                 continue
 
-        print("filters 로드 완료")
-        print("patterns 로드 완료")
+        print("\n#---------------------------------------")
+        print("# 결과 요약")
+        print("#---------------------------------------")
+
+        print(f"총 테스트: {total_count}개")
+        print(f"통과: {pass_count}개")
+        print(f"실패: {fail_count}개")
+
+        # print("filters 로드 완료")
+        # print("patterns 로드 완료")
 
 
 if __name__ == "__main__":
