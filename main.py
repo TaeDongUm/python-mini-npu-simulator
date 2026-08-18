@@ -1,7 +1,7 @@
 from matrix import input_matrix
 from mac import calculate_mac, determine_result
 from performance import measure_performance
-from analyzer import load_data
+from analyzer import load_data, select_filters
 
 
 def select_mode() -> str:
@@ -44,6 +44,10 @@ def main() -> None:
 
     if mode == "2":
         filters, patterns = load_data("data.json")
+
+        for case_id in patterns:
+            selected_filters = select_filters(case_id, filters)
+            print(f"{case_id} -> 필터 선택 완료")
 
         print("filters 로드 완료")
         print("patterns 로드 완료")
