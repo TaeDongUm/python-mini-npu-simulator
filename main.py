@@ -1,7 +1,12 @@
 from matrix import input_matrix
 from mac import calculate_mac, determine_result
 from performance import measure_performance
-from analyzer import load_data, extract_size, select_filters
+from analyzer import (
+    load_data,
+    extract_size,
+    select_filters,
+    normalize_label,
+)
 from matrix import validate_matrix
 
 
@@ -56,8 +61,36 @@ def main() -> None:
                 if not validate_matrix(pattern, size):
                     print(f"{case_id}: 패턴 크기 오류 - 다음 케이스로 이동")
                     continue
+                cross_filter = None
+                x_filter = None
 
-                print(f"{case_id}: 크기 검증 완료")
+                for filter_name, filter_matrix in selected_filters.items():
+                    label = normalize_label(filter_name)
+
+                    if label == "Cross":
+                        cross_filter = filter_matrix
+
+                    if label == "X":
+                        x_filter = filter_matrix
+
+                if cross_filter is None or x_filter is None:
+                    print(f"{case_id}: 필요한 필터가 없습니다.")
+                    continue
+
+                if not validate_matrix(cross_filter, size):
+                    print(f"{case_id}: Cross 필터 크기 오류")
+                    continue
+
+                if not validate_matrix(x_filter, size):
+                    print(f"{case_id}: X 필터 크기 오류")
+                    continue
+
+                cross_score = calculate_mac(pattern, cross_filter)
+                x_score = calculate_mac(pattern, x_filter)
+
+                print(f"\n--- {case_id} ---")
+                print(f"Cross 점수: {cross_score}")
+                print(f"X 점수: {x_score}")
 
             except (KeyError, ValueError, TypeError) as error:
                 print(f"{case_id}: 데이터 오류 ({error}) - 다음 케이스로 이동")
