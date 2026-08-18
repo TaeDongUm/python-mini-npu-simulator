@@ -51,6 +51,8 @@ def main() -> None:
     if mode == "2":
         filters, patterns = load_data("data.json")
 
+        failures = []
+
         for case_id, case_data in patterns.items():
             try:
                 size = extract_size(case_id)
@@ -104,6 +106,18 @@ def main() -> None:
                     status = "PASS"
                 else:
                     status = "FAIL"
+
+                if status == "FAIL":
+                    if result == "UNDECIDED":
+                        reason = "epsilon 기준 동점으로 UNDECIDED 판정"
+                    else:
+                        reason = f"expected={expected}, prediction={result}"
+                    failures.append(
+                        {
+                            "case_id": case_id,
+                            "reason" : reason,
+                        }
+                    )
 
                 print(f"\n--- {case_id} ---")
                 print(f"Cross 점수: {cross_score}")
