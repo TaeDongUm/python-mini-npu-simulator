@@ -20,3 +20,17 @@ def input_matrix(title: str, size: int = 3) -> list[list[float]]:
         matrix.append(row)
 
     return matrix
+
+# 행렬이 정확한 N x N 크기인지 검증한다.
+def validate_matrix(
+    matrix: list[list[float]],
+    size: int
+) -> bool:
+    if len(matrix) != size:
+        return False
+
+    for row in matrix:
+        if len(row) != size:
+            return False
+
+    return True
