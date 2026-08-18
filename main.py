@@ -8,6 +8,7 @@ from analyzer import (
     normalize_label,
 )
 from matrix import validate_matrix
+from performance import measure_performance, measure_sizes
 
 
 def select_mode() -> str:
@@ -118,6 +119,8 @@ def main() -> None:
                             "reason" : reason,
                         }
                     )
+
+                performance_results = measure_sizes()
 
                 print(f"\n--- {case_id} ---")
                 print(f"Cross 점수: {cross_score}")
