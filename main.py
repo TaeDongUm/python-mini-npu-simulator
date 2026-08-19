@@ -57,6 +57,8 @@ def main() -> None:
         fail_count = 0
         failures = []
 
+        performance_results = measure_sizes()
+
         for case_id, case_data in patterns.items():
             total_count += 1
             try:
@@ -124,9 +126,7 @@ def main() -> None:
                             "case_id": case_id,
                             "reason" : reason,
                         }
-                    )
-
-                performance_results = measure_sizes()
+                    )                
 
                 print(f"\n--- {case_id} ---")
                 print(f"Cross 점수: {cross_score}")
