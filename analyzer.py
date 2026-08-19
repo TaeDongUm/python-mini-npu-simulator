@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 
 # data.json 파일을 읽고 filters와 patterns를 반환한다.
 def load_data(file_path: str) -> tuple[dict, dict]:
@@ -25,7 +26,7 @@ def select_filters(case_id: str, filters: dict) -> dict:
     return filters[filter_key]
 
 # 외부 데이터의 라벨을 프로그램 내부 표준 라벨로 변환한다.
-def normalize_label(label: str) -> str | None:
+def normalize_label(label: str) -> Optional[str]:
     normalized = label.strip().lower()
 
     if normalized == "+":
