@@ -96,7 +96,7 @@ def main() -> None:
                 x_score = calculate_mac(pattern, x_filter)
 
                 result = determine_result(
-                    cross_filter,
+                    cross_score,
                     x_score,
                     "Cross",
                     "X"
