@@ -52,7 +52,7 @@
 - [x] 실행 방법을 작성함
 - [x] MAC 연산과 epsilon 판정 방식을 간단히 설명함
 - [x] 라벨 정규화를 한 이유를 설명함
-- [ ] FAIL이 있다면 원인을 분석하고, 없다면 실패가 0인 이유를 설명함
+- [x] FAIL이 있다면 원인을 분석하고, 없다면 실패가 0인 이유를 설명함
 - [x] N×N에서 N²번 연산하므로 시간복잡도가 `O(N²)`임을 설명함
 
 ## 9. 보너스 — 시간 남으면
@@ -265,3 +265,33 @@ x -> X
 - 이에 따라 MAC 연산의 시간 복잡도는 O(N^2)
 - 다만 실제 측정 시간이 정확히 N^2의 비율대로 증가한다고 할 수는 없습니다.
 - 실제 실행 시간에는 Python 인터프리터 실행 비용, 운영체제의 스케줄링, CPU 상태, 캐시 등의 환경적인 요소도 영향을 줄 수 있습니다.
+
+# 실행 결과 및 실패 원인 분석
+
+![making files](https://github.com/TaeDongUm/python-mini-npu-simulator/blob/main/screenshots/result_summation.png)
+
+> Node 2에서 `data.json`의 전체 패턴을 대상으로 테스트를 진행했습니다.
+
+```text
+size_5_1  → UNDECIDED → expected X     → FAIL
+size_5_2  → Cross     → expected Cross → PASS
+
+size_13_1 → X         → expected X     → PASS
+size_13_2 → UNDECIDED → expected Cross → FAIL
+
+size_25_1 → UNDECIDED → expected X     → FAIL
+size_25_2 → Cross     → expected Cross → PASS
+```
+
+- 총 테스트 케이스는 6개
+- PASS는 3개
+- FAIL은 3개
+- `size_5_1`은 Cross와 X의 MAC 점수가 동일하여 `UNDECIDED`로 판정되었습니다.
+  - 하지만 해당 케이스의 expected 값은 `X`이므로 FAIL이 발생하였습니다.
+- `size_13_2` 역시 Cross와 X의 MAC 점수가 동일하여 `UNDECIDED`가 되었습니다.
+  - 해당 케이스의 expected 값은 `Cross`이므로 FAIL이 발생하였습니다.
+- `size_25_1`도 두 MAC 점수가 동일하여 `UNDECIDED`로 판정되었습니다..
+  - 해당 케이스의 expected 값은 `X`이므로 FAIL이 발생하였습니다.
+- 이 FAIL들은 프로그램 실행 오류가 아니라 EPSILON 기반 동점 처리 정책과 expected 값의 차이에서 발생했습니다.
+- 두 점수의 차이가 `EPSILON`보다 작으면 특정 라벨을 강제로 선택하지 않고 `UNDECIDED`로 처리했습니다.
+- 따라서 해당 테스트들은 동점 상황에서 프로그램의 판정 정책이 정상적으로 적용되고 있음을 확인하는 사례로 볼 수 있다.
